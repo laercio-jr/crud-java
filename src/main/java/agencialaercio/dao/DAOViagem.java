@@ -5,14 +5,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
 import agencialaercio.model.Viagem;
 
 public class DAOViagem {
 	
-	private final String url = "jdbc:postgresql://localhost:5432/postgres";
-	private final String usuario = "postgres"; 
-	private final String senha = "aluno123";
-	private final String driverBanco = "org.postgresql.Driver";
+	private final String url = "jdbc:mysql://localhost:3306/agencia";
+	private final String usuario = "root"; 
+	private final String senha = "root";
+	private final String driverBanco = "com.mysql.jdbc.Driver";
 	private Connection conexao = null;
 	private PreparedStatement preparedStatement = null;
 
@@ -23,28 +24,24 @@ public class DAOViagem {
 	
 	public void incluir(Viagem viagem) throws Exception {
 		
-		final String instrucao_sql = "INSERT INTO alunos (id, matricula, nome, teste, prova) VALUES(?,?,?,?,?)";
+		final String instrucao_sql = "INSERT INTO viagens (viajante,destino,temGuia) VALUES (?,?,?);";
 		
 			preparedStatement = conexao.prepareStatement(instrucao_sql);
-			preparedStatement.setInt(1, viagem.getId());
-			preparedStatement.setString(2, viagem.getMatricula());
-			preparedStatement.setString(3, viagem.getNome());
-			preparedStatement.setDouble(4, viagem.getTeste());
-			preparedStatement.setDouble(5, viagem.getProva());
-			
-			preparedStatement.executeUpdate();
-			
+			preparedStatement.setString(1, viagem.getViajante());			
+			preparedStatement.setString(2, viagem.getDestino());
+			preparedStatement.setBoolean(3, viagem.isTemGuia());
+			preparedStatement.executeUpdate();			
 		
 	}
 	
 	
 	public void excluir(Viagem viagem) throws Exception  {
 		
-		final String instrucao_sql = "DELETE FROM alunos WHERE matricula = ?";
+		final String instrucao_sql = "DELETE FROM viagens WHERE id = ?";
 		
 			preparedStatement = conexao.prepareStatement(instrucao_sql);
 			
-			preparedStatement.setString(1, viagem.getMatricula());
+			preparedStatement.setInt(1, viagem.getId());
 			
 			preparedStatement.executeUpdate();
 			
@@ -54,14 +51,14 @@ public class DAOViagem {
 	
 	public void alterar(Viagem viagem) throws Exception {
 		
-		final String instrucao_sql = "UPDATE alunos set id = ?, nome = ?, teste = ?, prova = ? WHERE matricula = ?";
+		final String instrucao_sql = "UPDATE viagens set id = ?, viajante = ?, destino = ?, temGuia = ? WHERE id = ?";
 
 			preparedStatement = conexao.prepareStatement(instrucao_sql);
 			preparedStatement.setInt(1, viagem.getId());
-			preparedStatement.setString(5, viagem.getMatricula());
-			preparedStatement.setString(2, viagem.getNome());
-			preparedStatement.setDouble(3, viagem.getTeste());
-			preparedStatement.setDouble(4, viagem.getProva());
+			preparedStatement.setString(2, viagem.getViajante());			
+			preparedStatement.setString(3, viagem.getDestino());
+			preparedStatement.setBoolean(4, viagem.isTemGuia());
+			preparedStatement.setInt(5, viagem.getId());
 			
 			preparedStatement.executeUpdate();
 			
@@ -69,10 +66,10 @@ public class DAOViagem {
 	}
 	
 	public Viagem consultar(Viagem viagem) throws Exception {
-		final String instrucao_sql = "SELECT * FROM alunos WHERE matricula = ?";
+		final String instrucao_sql = "SELECT * FROM viagens WHERE id = ?";
 
 			preparedStatement = conexao.prepareStatement(instrucao_sql);
-			preparedStatement.setString(1, viagem.getMatricula());
+			preparedStatement.setInt(1, viagem.getId());
 			
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -80,10 +77,9 @@ public class DAOViagem {
 			while(resultSet.next()) {
 				
 				viagem.setId(resultSet.getInt("id"));
-				viagem.setMatricula(resultSet.getString("matricula"));
-				viagem.setNome(resultSet.getString("nome"));
-				viagem.setTeste(resultSet.getDouble("teste"));
-				viagem.setProva(resultSet.getDouble("prova"));
+				viagem.setViajante(resultSet.getString("viajante"));
+				viagem.setDestino(resultSet.getString("destino"));
+				viagem.setTemGuia(resultSet.getBoolean("temGuia"));
 				
 			}
 

@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import agencialaercio.dao.DAOViagem;
 import agencialaercio.model.Viagem;
 
-
-@WebServlet("/viagem-cadastro")
-public class viagemCadastroController extends HttpServlet {
+/**
+ * Servlet implementation class viagemExcluirController
+ */
+@WebServlet("/viagem-excluir")
+public class viagemExcluirController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public viagemCadastroController() {
+    public viagemExcluirController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +31,6 @@ public class viagemCadastroController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		RequestDispatcher despacho = null;
 		
 		try {
@@ -37,11 +38,9 @@ public class viagemCadastroController extends HttpServlet {
 			DAOViagem daoViagem = new DAOViagem();
 		
 			Viagem viagem = new Viagem();
-			viagem.setViajante(request.getParameter("txtViajante"));
-			viagem.setDestino(request.getParameter("txtDestino"));
-			viagem.setTemGuia(Boolean.parseBoolean(request.getParameter("txtTemGuia")));
+			viagem.setId(Integer.parseInt(request.getParameter("txtId")));
 
-			daoViagem.incluir(viagem);
+			daoViagem.excluir(viagem);
 		
 			despacho = request.getRequestDispatcher("index.jsp");
 			despacho.forward(request, response);

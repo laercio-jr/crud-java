@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import agencialaercio.dao.DAOViagem;
 import agencialaercio.model.Viagem;
 
-
-@WebServlet("/viagem-cadastro")
-public class viagemCadastroController extends HttpServlet {
+/**
+ * Servlet implementation class viagemAtualizarController
+ */
+@WebServlet("/viagem-atualizar")
+public class viagemAtualizarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public viagemCadastroController() {
+    public viagemAtualizarController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +31,23 @@ public class viagemCadastroController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		RequestDispatcher despacho = null;
 		
 		try {
 		
-			DAOViagem daoViagem = new DAOViagem();
+		DAOViagem daoViagem = new DAOViagem();
 		
-			Viagem viagem = new Viagem();
-			viagem.setViajante(request.getParameter("txtViajante"));
-			viagem.setDestino(request.getParameter("txtDestino"));
-			viagem.setTemGuia(Boolean.parseBoolean(request.getParameter("txtTemGuia")));
+		Viagem viagem = new Viagem();
+		viagem.setId(Integer.parseInt(request.getParameter("txtId")));
+		viagem.setViajante(request.getParameter("txtViajante"));
+		viagem.setDestino(request.getParameter("txtDestino"));
+		viagem.setTemGuia(Boolean.parseBoolean(request.getParameter("txtTemGuia")));
 
-			daoViagem.incluir(viagem);
+		daoViagem.alterar(viagem);
 		
-			despacho = request.getRequestDispatcher("index.jsp");
-			despacho.forward(request, response);
+		despacho = request.getRequestDispatcher("index.jsp");
+		despacho.forward(request, response);
 		
 		}catch (Exception e) {
 			e.printStackTrace();
