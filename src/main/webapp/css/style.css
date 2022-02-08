@@ -1,0 +1,22 @@
+﻿
+body {
+    height: 100%;
+}
+
+.tamanho-imagem{
+    max-height: 4rem;
+}
+
+.centralizar {
+    justify-content: center;
+}
+
+.fundo-gradiente {
+    background-image: radial-gradient(#c5dee59c, #9dc6d340, #ffffff00);
+}
+
+.glass {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
