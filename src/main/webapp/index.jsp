@@ -144,27 +144,15 @@
                         <th>Viajante</th>
                         <th>Destino</th>
                         <th>Guia turístico</th>
-                        <th>X</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @{
-                        foreach (var viagem in viagens)
-                        {
-                            <tr>
-                                <td>@viagem.Id</td>
-                                <td>@viagem.Viajante</td>
-                                <td>@viagem.Destino</td>
-                                <td>@viagem.TemGuia</td>
-                                <td>
-                                    <form asp-controller="Viagem" asp-action="Deletar">
-                                        <button class="btn btn-danger" type="submit">Deletar</button>
-                                        <input asp-for="Id" style="visibility:hidden;" type="text" value="@viagem.Id">
-                                    </form>
-                                </td>
-                            </tr> 
-                        }
-                    }
+                  <tr>
+                      <td>@viagem.Id</td>
+                      <td>@viagem.Viajante</td>
+                      <td>@viagem.Destino</td>
+                      <td>@viagem.TemGuia</td>
+                  </tr> 
                 </tbody>
             </table>
             
@@ -204,29 +192,21 @@
 
                 <div>
                     <h2>Atualizar Dados</h2>
-                    <form asp-controller="Viagem" asp-action="Atualizar">
+                    <form action="viagem-atualizar" method="post">
                         <div class="form-group ">
-                            <label for="">ID da viagem</label>
-                            <select class="custom-select" asp-for="Id">
-                                <option selected>-- Selecione um código</option>
-                                /* @{
-                                    foreach (var viagem in viagens)
-                                    {
-                                        <option>@viagem.Id</option>
-                                    }
-                                }
-                            </select>
+                            <label>ID da viagem</label>                            
+                            <input type="text" class="form-control" name="txtId" placeholder="Digite o ID">
                         </div>
 
                         <div class="form-group">
                             <label for="">Nome do viajante</label>
-                            <input asp-for="Viajante" type="text" class="form-control" id="" placeholder="Digite seu nome">
+                            <input type="text" class="form-control" name="txtViajante" placeholder="Digite seu nome">
                         </div>
 
                         <div class="form-group">
-                            <label for="">Destinos</label>
-                            <select class="custom-select" asp-for="Destino">
-                                <option selected>Escolha um destino...</option>
+                            <label>Destinos</label>
+                            <select class="custom-select" name="txtDestino">
+                                <option selected disabled hidden>Escolha um destino...</option>
                                 <option>Cristo Redentor</option>
                                 <option>Disneyland</option>
                                 <option>Torre Eiffel</option>
@@ -237,7 +217,7 @@
 
 
                         <div class="form-check">
-                            <input asp-for="TemGuia" type="checkbox" id="checkn1" class="form-check-input">
+                            <input name="txtTemGuia" type="checkbox" id="checkn1" class="form-check-input">
                             <label class="form-check-label" for="checkn1">Guia Turistico</label>
                         </div>
 
@@ -248,6 +228,22 @@
                     </form>
                 </div>
             </div>
+                 <br/>
+                 <br/>
+            <div class="container w-50">
+            <h2>Excluir viagem</h2>
+             <form action="viagem-excluir" method="post">
+                 <div class="form-group">
+                     <label>ID da viagem</label>
+                     <input  type="text" class="form-control" name="txtId" placeholder="Digite um ID">
+                 </div>
+                 <br/>
+                 <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+                 <br/>
+                 <br/>
+                 <br/>
+             </form>
+             </div>
     </div>
 </div>
 
