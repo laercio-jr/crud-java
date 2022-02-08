@@ -1,3 +1,4 @@
+<%@page import="agencialaercio.model.Viagem"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
       <div class="container" style="justify-content: center;">                
-          <a class="navbar-brand" href="./index.jsp">
+          <a class="navbar-brand">
               <img class="tamanho-imagem" src="./img/logo.png"/>
           </a>
       </div>
@@ -140,6 +141,7 @@
         	<!-- 
             <h2>Lista de viagens Confirmadas</h2>
              -->
+             <% Viagem viagem = (Viagem) request.getAttribute("viagemConsultada"); %>
              
              <h2>Pesquisar viagem por ID</h2>
              <form action="viagem-consulta" method="post">
@@ -161,11 +163,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                      <td></td>
-                      <td> </td>
-                      <td> </td>
-                      <td></td>
+                  <tr class="text-white">
+                      <td><%=viagem.getId()%></td>
+                      <td><%=viagem.getViajante()%> </td>
+                      <td><%=viagem.getDestino()%> </td>
+                      <td><%= viagem.isTemGuia()%> </td>
                   </tr> 
                 </tbody>
             </table>

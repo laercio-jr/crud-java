@@ -41,9 +41,9 @@ public class viagemConsultarController extends HttpServlet {
 
 		viagem = daoViagem.consultar(viagem);
 		 
-		request.setAttribute("al", viagem);
+		request.setAttribute("viagemConsultada", viagem);
 		
-		despacho = request.getRequestDispatcher("index.jsp");
+		despacho = request.getRequestDispatcher("indexConsultado.jsp");
 		despacho.forward(request, response);
 		
 		}catch (Exception e) {
