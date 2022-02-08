@@ -12,7 +12,7 @@ public class DAOViagem {
 	
 	private final String url = "jdbc:mysql://localhost:3306/agencia";
 	private final String usuario = "root"; 
-	private final String senha = "root";
+	private final String senha = "";
 	private final String driverBanco = "com.mysql.jdbc.Driver";
 	private Connection conexao = null;
 	private PreparedStatement preparedStatement = null;

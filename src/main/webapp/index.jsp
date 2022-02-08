@@ -173,16 +173,16 @@
             <div class="container d-flex justify-content-around">
                 <div>
                     <h2>Cadastrar viagem</h2>
-                    <form asp-controller="Viagem" asp-action="Index">
+                    <form action="viagem-cadastro" method="post">
                         <div class="form-group">
-                            <label for="">Nome do viajante</label>
-                            <input asp-for="Viajante" type="text" class="form-control" id="" placeholder="Digite um nome">
+                            <label>Nome do viajante</label>
+                            <input  type="text" class="form-control" name="txtViajante" placeholder="Digite um nome">
                         </div>
 
                         <div class="form-group">
-                            <label for="">Destinos</label>
-                            <select class="custom-select" asp-for="Destino">
-                                <option selected>Escolha um destino...</option>
+                            <label>Destinos</label>
+                            <select class="custom-select" name="txtDestino">
+                                <option selected disabled hidden>Escolha um destino...</option>
                                 <option>Cristo Redentor</option>
                                 <option>Disneyland</option>
                                 <option>Torre Eiffel</option>
@@ -192,7 +192,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input asp-for="TemGuia" type="checkbox" id="checkn1" class="form-check-input">
+                            <input type="checkbox" id="checkn1" name="txtTemGuia" class="form-check-input">
                             <label class="form-check-label" for="checkn1">Guia Turistico</label>
                         </div>
 
